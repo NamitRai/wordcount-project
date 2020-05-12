@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter</title>
+  </head>
+  <body>
+    <h1>
+      Word Counter
+    </h1>
+    <form id="form_word">
+      <div style="margin: 0px, auto;">
+        <textarea
+          id="07"
+          name="fulltext"
+          style="
+            height: 300px;
+            width: 500px;
+            font-size: 14pt;
+            margin-left: 50px;
+          "
+        ></textarea>
+      </div>
+      <br />
+      <button class="word" name="word" type="submit">Count Word</button>
+      <button class="word" name="char" type="submit">Count Charecter</button>
+      <button class="word" name="freq" type="submit">
+        Count Frequency
+      </button>
+    </form>
+    <script type="text/javascript">
+      const classes = document.querySelectorAll(".word");
+      classes.forEach((c) => {
+        c.addEventListener("click", (e) => {
+          e.preventDefault();
+          const form = document.getElementById("form_word");
+          const count = "count" + e.target.name;
+          if (e.target.name === "word") {
+            form.action = '{% url "countword" %}';
+            form.submit();
+          } else if (e.target.name === "char") {
+            form.action = '{% url "countchar" %}';
+            form.submit();
+          } else if (e.target.name === "freq") {
+            form.action = '{% url "countfreq" %}';
+            form.submit();
+          }
+        });
+      });
+    </script>
+    <br />
+    <a href='{% url "about" %}'>About</a>
+  </body>
+</html>
